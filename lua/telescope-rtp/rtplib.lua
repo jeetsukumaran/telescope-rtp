@@ -18,10 +18,13 @@ end
 M.path_display = function(opts, transformed_path)
     local display = string.match(transformed_path, '.-start[\\/](.*)$')
     if display == nil or display == "" then
-        -- probably builtin-in??
-        display = string.match(transformed_path, '.-(runtime[\\/].*)$')
+        display = string.match(transformed_path, '.-opt[\\/](.*)$')
         if display == nil or display == "" then
-            display = transformed_path
+            -- probably builtin-in??
+            display = string.match(transformed_path, '.-(runtime[\\/].*)$')
+            if display == nil or display == "" then
+                display = transformed_path
+            end
         end
     end
     return display
