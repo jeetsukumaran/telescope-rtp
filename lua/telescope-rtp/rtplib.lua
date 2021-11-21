@@ -10,9 +10,21 @@ M.tbl_clone = function(original)
   return copy
 end
 
-M.path_display = function(opts, transformed_path)
+M.path_display_file = function(opts, transformed_path)
     local dir, file, ext = string.match(transformed_path, "(.-)([^\\/]-%.?([^%.\\/]*))$")
     return file
+end
+
+M.path_display = function(opts, transformed_path)
+    local display = string.match(transformed_path, '.-start[\\/](.*)$')
+    if display == nil or display == "" then
+        -- probably builtin-in??
+        display = string.match(transformed_path, '.-(runtime[\\/].*)$')
+        if display == nil or display == "" then
+            display = transformed_path
+        end
+    end
+    return display
 end
 
 M.grep_highlighter_only = function(opts)
