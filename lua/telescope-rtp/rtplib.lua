@@ -30,8 +30,7 @@ M.cmd_generator = function(opts, prompt, subdir)
     end
     local args = M.tbl_clone(opts.vimgrep_arguments)
     local prompt_parts = vim.split(prompt, " ")
-    local rtp_path_str = vim.o.runtimepath
-    local rtp_paths = vim.split(rtp_path_str, ",")
+    local rtp_paths = vim.api.nvim_list_runtime_paths()
     local doc_paths
     if subdir == nil then
         doc_paths = rtp_paths
